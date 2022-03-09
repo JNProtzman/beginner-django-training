@@ -40,7 +40,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     objects = UserProfileManager()
-    """Replaces the default username field with email""""
+    """Replaces the default username field with email"""
     USERNAME_FIELD = 'email'
     """The user must specify email AND name"""
     REQUIRED_FIELDS = ['name']
