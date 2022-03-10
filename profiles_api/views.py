@@ -28,7 +28,7 @@ class HelloApiView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         name = serializer.validated_data.get('name')
-        message = 'Hello {}'.format(name)
+        message = f'Hello {name}'
         return Response({'message': message})
 
     def put(self, request, pk=None):

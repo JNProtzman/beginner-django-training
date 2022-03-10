@@ -12,13 +12,13 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/jammy64"
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y python3-venv zip
+    sudo apt-get install -y python3-venv zip python3-pip
     touch /home/vagrant/.bash_aliases
     if ! grep -q PYTHON_ALIAS_ADDED /home/vagrant/.bash_aliases; then
         echo "# PYTHON_ALIAS_ADDED" >> /home/vagrant/.bash_aliases
@@ -26,3 +26,22 @@ Vagrant.configure("2") do |config|
     fi
   SHELL
 end
+
+
+"""
+INITIAL PROJECT SETUP IN VAGRANT
+
+cd /vagrant
+
+# Create a virtual env
+python -m venv ~/env
+
+# Activate the virtualenv
+source ~/env/bin/activate
+
+# Install requirements
+python3 -m pip install -r requirements.txt
+
+# Run the server on the port you want to run it on
+python3 manage.py runserver 0.0.0.0:8080
+"""
